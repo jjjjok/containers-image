@@ -16,7 +16,6 @@ import (
 	"github.com/containers/image/v5/internal/signature"
 	"github.com/containers/image/v5/types"
 	"github.com/opencontainers/go-digest"
-	"github.com/sirupsen/logrus"
 )
 
 const version = "Directory Transport Version: 1.1\n"
@@ -81,10 +80,10 @@ func newImageDestination(sys *types.SystemContext, ref dirReference) (private.Im
 				return nil, ErrNotContainerImageDir
 			}
 			// delete directory contents so that only one image is in the directory at a time
-			if err = removeDirContents(ref.resolvedPath); err != nil {
-				return nil, fmt.Errorf("erasing contents in %q: %w", ref.resolvedPath, err)
-			}
-			logrus.Debugf("overwriting existing container image directory %q", ref.resolvedPath)
+			/*			if err = removeDirContents(ref.resolvedPath); err != nil {
+							return nil, fmt.Errorf("erasing contents in %q: %w", ref.resolvedPath, err)
+						}
+						logrus.Debugf("overwriting existing container image directory %q", ref.resolvedPath)*/
 		}
 	} else {
 		// create directory if it doesn't exist
